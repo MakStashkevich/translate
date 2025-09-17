@@ -2,7 +2,7 @@
 'use client';
 
 import React from 'react';
-import { LocaleType, AllTranslations, setLocale, setTranslations, getLocale, useTranslateModel } from '../model';
+import { LocaleType, AllTranslations, setLocale, setTranslations, useTranslateModel } from '../model';
 
 interface TranslateProviderProps {
   children: React.ReactNode;

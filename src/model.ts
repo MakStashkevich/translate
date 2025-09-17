@@ -14,19 +14,16 @@ export interface ITranslateModelState {
   setLocale: (locale: LocaleType) => void;
   setTranslations: (translations: AllTranslations) => void;
   t: (key: string, args?: Args) => string;
-  initializeTranslations: (locale: LocaleType, translations: AllTranslations) => void;
 }
 
 const initialState: ITranslateModelState = {
-  locale: 'en', // По умолчанию английский
+  locale: 'ru', // По умолчанию английский
   translations: {
-    en: {}, // Инициализируем английский язык пустым объектом
     ru: {}, // Инициализируем русский язык пустым объектом
   },
   setLocale: () => {},
   setTranslations: () => {},
   t: () => '',
-  initializeTranslations: () => {},
 };
 
 const _useTranslateModel = create<ITranslateModelState>((set, get) => ({
@@ -36,9 +33,6 @@ const _useTranslateModel = create<ITranslateModelState>((set, get) => ({
   },
   setTranslations: (translations: AllTranslations) => {
     set({ translations });
-  },
-  initializeTranslations: (locale: LocaleType, translations: AllTranslations) => {
-    set({ locale, translations });
   },
   t: (key: string, args?: Args): string => {
     const { translations, locale } = get();
@@ -57,5 +51,4 @@ export const useTranslateModel = createSelectors(_useTranslateModel);
 export const setLocale = (locale: LocaleType) => _useTranslateModel.getState().setLocale(locale);
 export const getLocale = (): LocaleType => _useTranslateModel.getState().locale;
 export const setTranslations = (translations: AllTranslations) => _useTranslateModel.getState().setTranslations(translations);
-export const initializeTranslations = (locale: LocaleType, translations: AllTranslations) => _useTranslateModel.getState().initializeTranslations(locale, translations);
 export const t = (key: string, args?: Args) => _useTranslateModel.getState().t(key, args);
