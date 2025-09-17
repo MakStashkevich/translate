@@ -1,0 +1,40 @@
+{
+  "name": "@makstashkevich/translate",
+  "version": "1.0.0",
+  "description": "Node.js module for Next.js with localization and Zustand state management.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "nextjs",
+    "localization",
+    "zustand",
+    "typescript",
+    "i18n"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "react": "^19.1.1",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.1",
+    "@types/react": "^19.1.13",
+    "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  }
+}
