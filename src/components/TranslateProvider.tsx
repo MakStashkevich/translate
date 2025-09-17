@@ -2,32 +2,33 @@
 'use client';
 
 import React from 'react';
-import { LocaleType, AllTranslations, setLocale, setTranslations, useTranslateModel } from '../model';
+import { LocaleType, AllTranslations, setDefaultLocale, setTranslations, useTranslateModel } from '../model';
 
 interface TranslateProviderProps {
   children: React.ReactNode;
-  locale: LocaleType;
+  defaultLocale: LocaleType;
   translations: AllTranslations;
 }
 
 /**
  * Компонент-провайдер для инициализации системы локализации.
- * Устанавливает начальный язык и загружает переводы в Zustand модель.
+ * Устанавливает начальный язык и загружает переводы.
  * Если переводы уже были инициализированы на сервере, то повторной инициализации не происходит.
  * @param {TranslateProviderProps} props Свойства компонента.
  * @returns {React.ReactNode} Дочерние элементы.
  */
 export const TranslateProvider: React.FC<TranslateProviderProps> = ({
   children,
-  locale,
+  defaultLocale,
   translations,
 }) => {
-  const currentLocale = useTranslateModel((state) => state.locale);
+  const currentDefaultLocale = useTranslateModel((state) => state.defaultLocale);
   const currentTranslations = useTranslateModel((state) => state.translations);
 
-  if (currentLocale !== locale) {
-    setLocale(locale);
+  if (currentDefaultLocale !== defaultLocale) {
+    setDefaultLocale(defaultLocale);
   }
+
   if (currentTranslations !== translations) {
     setTranslations(translations);
   }
