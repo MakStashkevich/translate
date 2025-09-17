@@ -15,7 +15,7 @@ export interface ITranslateModelState {
   setLocale: (locale: LocaleType) => void;
   setDefaultLocale: (defaultLocale: LocaleType) => void;
   setTranslations: (translations: AllTranslations) => void;
-  t: (key: string, args?: Args) => string;
+  translate: (key: string, args?: Args) => string;
 }
 
 const initialState: ITranslateModelState = {
@@ -27,7 +27,7 @@ const initialState: ITranslateModelState = {
   setLocale: () => {},
   setDefaultLocale: () => {},
   setTranslations: () => {},
-  t: () => '',
+  translate: () => '',
 };
 
 const _useTranslateModel = create<ITranslateModelState>((set, get) => ({
@@ -41,7 +41,7 @@ const _useTranslateModel = create<ITranslateModelState>((set, get) => ({
   setTranslations: (translations: AllTranslations) => {
     set({ translations });
   },
-  t: (key: string, args?: Args): string => {
+  translate: (key: string, args?: Args): string => {
     const { translations, locale } = get();
     const currentTranslations = translations[locale] || {}; // Получаем переводы для текущего языка
     const translationString = getNestedTranslation(currentTranslations, key);
@@ -60,4 +60,4 @@ export const getLocale = (): LocaleType => _useTranslateModel.getState().locale;
 export const setDefaultLocale = (defaultLocale: LocaleType) => _useTranslateModel.getState().setDefaultLocale(defaultLocale);
 export const getDefaultLocale = (): LocaleType => _useTranslateModel.getState().defaultLocale;
 export const setTranslations = (translations: AllTranslations) => _useTranslateModel.getState().setTranslations(translations);
-export const t = (key: string, args?: Args) => _useTranslateModel.getState().t(key, args);
+export const translate = (key: string, args?: Args) => _useTranslateModel.getState().translate(key, args);
