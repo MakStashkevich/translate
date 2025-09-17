@@ -4,20 +4,24 @@ import { getNestedTranslation } from './utils/translation-parser';
 import { replaceArguments } from './utils/argument-replacer';
 
 export type LocaleType = 'ru' | 'en' | string; // Добавляем string для поддержки других языков
-export type Translations = Record<string, any>;
+export type Translations = Record<string, any>; // Объект переводов для конкретного языка
+export type AllTranslations = Record<LocaleType, Translations>; // Объект, содержащий переводы для всех языков
 type Args = Record<string, string | number> | (string | number)[];
 
 export interface ITranslateModelState {
   locale: LocaleType;
-  translations: Translations;
+  translations: AllTranslations;
   setLocale: (locale: LocaleType) => void;
-  setTranslations: (translations: Translations) => void;
+  setTranslations: (translations: AllTranslations) => void;
   t: (key: string, args?: Args) => string;
 }
 
 const initialState: ITranslateModelState = {
   locale: 'en', // По умолчанию английский
-  translations: {},
+  translations: {
+    en: {}, // Инициализируем английский язык пустым объектом
+    ru: {}, // Инициализируем русский язык пустым объектом
+  },
   setLocale: () => {},
   setTranslations: () => {},
   t: () => '',
@@ -28,12 +32,13 @@ const _useTranslateModel = create<ITranslateModelState>((set, get) => ({
   setLocale: (locale: LocaleType) => {
     set({ locale });
   },
-  setTranslations: (translations: Translations) => {
+  setTranslations: (translations: AllTranslations) => {
     set({ translations });
   },
   t: (key: string, args?: Args): string => {
-    const { translations } = get();
-    const translationString = getNestedTranslation(translations, key);
+    const { translations, locale } = get();
+    const currentTranslations = translations[locale] || {}; // Получаем переводы для текущего языка
+    const translationString = getNestedTranslation(currentTranslations, key);
 
     if (translationString) {
       return replaceArguments(translationString, args);
@@ -46,5 +51,5 @@ const _useTranslateModel = create<ITranslateModelState>((set, get) => ({
 export const useTranslateModel = createSelectors(_useTranslateModel);
 export const setLocale = (locale: LocaleType) => _useTranslateModel.getState().setLocale(locale);
 export const getLocale = (): LocaleType => _useTranslateModel.getState().locale;
-export const setTranslations = (translations: Translations) => _useTranslateModel.getState().setTranslations(translations);
+export const setTranslations = (translations: AllTranslations) => _useTranslateModel.getState().setTranslations(translations);
 export const t = (key: string, args?: Args) => _useTranslateModel.getState().t(key, args);

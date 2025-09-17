@@ -2,12 +2,12 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { LocaleType, Translations, setLocale, setTranslations } from '../model';
+import { LocaleType, AllTranslations, setLocale, setTranslations } from '../model';
 
 interface TranslateProviderProps {
   children: React.ReactNode;
   locale: LocaleType;
-  translations: Translations;
+  translations: AllTranslations;
 }
 
 /**
