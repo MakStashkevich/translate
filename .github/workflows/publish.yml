@@ -1,0 +1,40 @@
+name: Publish Package
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # триггер на тег вида v1.0.0
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read       # нужно для checkout
+      id-token: write      # нужно для OIDC
+
+    steps:
+      # 1. Получаем код
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Настраиваем Node.js и npm
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org/'
+          scope: '@makstashkevich'
+          always-auth: true
+
+      # 3. Устанавливаем зависимости
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Собираем библиотеку
+      - name: Build package
+        run: npm run build
+
+      # 5. Публикуем в npm
+      - name: Publish to npm
+        run: npm publish --access public
