@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "publish": "npm run build && npm publish --access public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "publishConfig": {
