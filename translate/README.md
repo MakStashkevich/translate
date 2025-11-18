@@ -1,4 +1,4 @@
-# @makstashkevich/translate ![minzip package size](https://img.shields.io/bundlephobia/minzip/@makstashkevich/translate) ![npm version](https://img.shields.io/npm/v/@makstashkevich/translate.svg)
+# @makstashkevich/translate ![minzip package size](https://img.shields.io/bundlephobia/minzip/@makstashkevich/translate) [![Version](https://img.shields.io/npm/v/@makstashkevich/translate.svg?colorB=green)](https://www.npmjs.com/package/@makstashkevich/translate)
 
 Модуль Node.js для Next.js с локализацией и управлением состоянием Zustand.
 
