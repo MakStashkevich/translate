@@ -1,15 +1,13 @@
-// src/utils/argument-replacer.ts
-
 type Args = Record<string, string | number> | (string | number)[]
 
 /**
- * Заменяет плейсхолдеры в строке перевода на соответствующие аргументы.
- * Поддерживает плейсхолдеры вида {1} (для массивов/списков) и {argName} (для объектов).
- * Если аргумент не найден, плейсхолдер остается в тексте.
- * @param translationString Строка перевода с плейсхолдерами.
- * @param args Аргументы для замены (массив или объект).
- * @returns Строка с замененными аргументами.
- */
+* Replaces the placeholders in the translation string with the corresponding arguments.
+* Supports placeholders like {1} (for arrays/lists) and {argName} (for objects).
+* If the argument is not found, the placeholder remains in the text.
+* @param translationString is a translation string with placeholders.
+* @param args Arguments to replace (array or object).
+* @returns String with replaced arguments.
+*/
 export function replaceArguments(translationString: string, args?: Args): string {
   if (!args) {
     return translationString
@@ -24,6 +22,6 @@ export function replaceArguments(translationString: string, args?: Args): string
     } else if (typeof args === 'object' && args !== null && args.hasOwnProperty(key)) {
       return String(args[key])
     }
-    return match // Если аргумент не найден, оставляем плейсхолдер как есть
+    return match // If the argument is not found, we leave the placeholder as it is.
   })
 }

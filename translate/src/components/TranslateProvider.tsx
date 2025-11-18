@@ -1,4 +1,3 @@
-// src/components/TranslateProvider.tsx
 'use client'
 
 import React from 'react'
@@ -17,12 +16,12 @@ interface TranslateProviderProps {
 }
 
 /**
- * Компонент-провайдер для инициализации системы локализации.
- * Устанавливает начальный язык и загружает переводы.
- * Если переводы уже были инициализированы на сервере, то повторной инициализации не происходит.
- * @param {TranslateProviderProps} props Свойства компонента.
- * @returns {React.ReactNode} Дочерние элементы.
- */
+* The provider component for initializing the localization system.
+* Sets the initial language and downloads the translations.
+* If the transfers have already been initialized on the server, then reinitialization does not occur.
+* @param {TranslateProviderProps} props Properties of the component.
+* @returns {React.ReactNode} Child elements.
+*/
 export const TranslateProvider: React.FC<TranslateProviderProps> = ({
   children,
   defaultLocale,

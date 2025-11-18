@@ -3,9 +3,9 @@ import { createSelectors } from './utils/selectors'
 import { getNestedTranslation } from './utils/translation-parser'
 import { replaceArguments } from './utils/argument-replacer'
 
-export type LocaleType = 'ru' | 'en' | string // Добавляем string для поддержки других языков
-export type Translations = Record<string, any> // Объект переводов для конкретного языка
-export type AllTranslations = Record<LocaleType, Translations> // Объект, содержащий переводы для всех языков
+export type LocaleType = string
+export type Translations = Record<string, any>
+export type AllTranslations = Record<LocaleType, Translations>
 type Args = Record<string, string | number> | (string | number)[]
 
 export interface ITranslateModelState {
@@ -19,11 +19,9 @@ export interface ITranslateModelState {
 }
 
 const initialState: ITranslateModelState = {
-  locale: 'ru', // По умолчанию
-  defaultLocale: 'ru',
-  translations: {
-    ru: {} // Инициализируем русский язык пустым объектом
-  },
+  locale: '',
+  defaultLocale: '',
+  translations: {},
   setLocale: () => {},
   setDefaultLocale: () => {},
   setTranslations: () => {},
@@ -43,14 +41,14 @@ const _useTranslateModel = create<ITranslateModelState>((set, get) => ({
   },
   translate: (key: string, args?: Args): string => {
     const { translations, locale } = get()
-    const currentTranslations = translations[locale] || {} // Получаем переводы для текущего языка
+    const currentTranslations = translations[locale] || {}
     const translationString = getNestedTranslation(currentTranslations, key)
 
     if (translationString) {
       return replaceArguments(translationString, args)
     }
 
-    return key // Возвращаем ключ, если перевод не найден
+    return key
   }
 }))
 
