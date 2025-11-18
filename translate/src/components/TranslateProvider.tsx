@@ -27,14 +27,15 @@ export const TranslateProvider: React.FC<TranslateProviderProps> = ({
   defaultLocale,
   translations
 }) => {
-  const currentDefaultLocale = useTranslateModel(state => state.defaultLocale)
-  const currentTranslations = useTranslateModel(state => state.translations)
+  const currentDefaultLocale = useTranslateModel.getState().defaultLocale;
+  const currentTranslations = useTranslateModel.getState().translations;
 
-  if (currentDefaultLocale !== defaultLocale) {
+  // Synchronous initialization only if the state is empty
+  if (!currentDefaultLocale) {
     setDefaultLocale(defaultLocale)
   }
 
-  if (currentTranslations !== translations) {
+  if (Object.keys(currentTranslations).length === 0) {
     setTranslations(translations)
   }
 
