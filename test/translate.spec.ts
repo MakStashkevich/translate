@@ -28,4 +28,19 @@ test.describe('Translate Plugin', () => {
   test('should return key if translation not found', async ({ page }) => {
     await expect(page.locator('text=nonExistentKey')).toBeVisible();
   });
+
+  test('should dynamically change translation argument', async ({ page }) => {
+    await expect(page.locator('text=Hello, Мир!')).toBeVisible();
+    await page.click('button:has-text("Change Name")');
+    await expect(page.locator('text=Hello, Планета!')).toBeVisible();
+    await page.click('button:has-text("Change Name")');
+    await expect(page.locator('text=Hello, Мир!')).toBeVisible();
+  });
+
+  test('should display translation using t function', async ({ page }) => {
+    await expect(page.locator('text=Home Page')).toBeVisible();
+    await page.click('button:has-text("Русский")');
+    await expect(page.locator('text=Домашняя страница')).toBeVisible();
+    await expect(page.locator('text=Home Page')).not.toBeVisible();
+  });
 });
