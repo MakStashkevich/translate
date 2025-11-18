@@ -23,8 +23,8 @@
     "typescript",
     "i18n"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "makstashkevich",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "react": "^19.1.1",
@@ -37,5 +37,9 @@
   },
   "peerDependencies": {
     "react": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/makstashkevich/translate.git"
   }
 }
