@@ -209,3 +209,25 @@ const translations = {
 <TranslateProvider defaultLocale="en" translations={translations}>
   {children}
 </TranslateProvider>
+```
+
+---
+
+**Важное примечание для пользователей Next.js: React Compiler**
+
+Ни в коем случае не включайте `reactCompiler` в вашем файле `next.config.js` (или `next.config.ts`), если вы используете эту библиотеку. Включение `reactCompiler` может помешать динамическому обновлению переводов на странице, что приведет к некорректному поведению локализации.
+
+Пример некорректной конфигурации:
+
+```typescript
+// examples/example/next.config.ts
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
+  reactCompiler: false // Эту строку НЕЛЬЗЯ устанавливать в true
+}
+
+export default nextConfig
+```
+
+Убедитесь, что `reactCompiler` либо отсутствует, либо явно установлен в `false` в вашем конфигурационном файле Next.js.
