@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react';
+import { useState } from 'react'
 
 import { useLocale, setLocale, translate, t } from '@makstashkevich/translate'
 
 export default function HomeContent() {
   const locale = useLocale()
-  const [userName, setUserName] = useState('Мир');
+  const [userName, setUserName] = useState('Мир')
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">

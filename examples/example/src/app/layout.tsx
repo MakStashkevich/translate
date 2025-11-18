@@ -39,7 +39,7 @@ const translations = {
       title: 'Домашняя страница'
     }
   }
-};
+}
 
 export default function RootLayout({
   children

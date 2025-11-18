@@ -25,7 +25,7 @@ $ yarn add @makstashkevich/translate
 
 ```jsx
 // app/layout.tsx или pages/_app.tsx
-import { TranslateProvider } from '@makstashkevich/translate';
+import { TranslateProvider } from '@makstashkevich/translate'
 
 // Ваши переводы
 const translations = {
@@ -41,7 +41,7 @@ const translations = {
       welcome: 'Добро пожаловать!'
     }
   }
-};
+}
 
 // Или импортируйте переводы из JSON-файлов:
 // import enLocale from '@/locales/en.json';
@@ -60,7 +60,7 @@ export default function RootLayout({ children }) {
         </TranslateProvider>
       </body>
     </html>
-  );
+  )
 }
 ```
 
@@ -69,14 +69,14 @@ export default function RootLayout({ children }) {
 Используйте хук `useLocale` для получения текущего языка и функции `setLocale` для его изменения.
 
 ```jsx
-import { useLocale, setLocale } from '@makstashkevich/translate';
+import { useLocale, setLocale } from '@makstashkevich/translate'
 
 const LanguageSwitcher = () => {
-  const locale = useLocale();
+  const locale = useLocale()
 
-  const handleChangeLanguage = (newLocale) => {
-    setLocale(newLocale);
-  };
+  const handleChangeLanguage = newLocale => {
+    setLocale(newLocale)
+  }
 
   return (
     <div>
@@ -84,8 +84,8 @@ const LanguageSwitcher = () => {
       <button onClick={() => handleChangeLanguage('en')}>English</button>
       <button onClick={() => handleChangeLanguage('ru')}>Русский</button>
     </div>
-  );
-};
+  )
+}
 ```
 
 ### Функция `translate` (или `t`)
@@ -93,18 +93,18 @@ const LanguageSwitcher = () => {
 Используйте функцию `translate` (или ее псевдоним `t`) для получения переведенных строк. Поддерживаются вложенные ключи и замена аргументов.
 
 ```jsx
-import { translate, t } from '@makstashkevich/translate';
+import { translate, t } from '@makstashkevich/translate'
 
 const MyComponent = () => {
-  const userName = 'Мир';
+  const userName = 'Мир'
 
   return (
     <div>
       <p>{translate('common.hello', { name: userName })}</p>
       <p>{t('common.welcome')}</p>
     </div>
-  );
-};
+  )
+}
 ```
 
 ### Хук `useTranslations`
@@ -112,44 +112,40 @@ const MyComponent = () => {
 Используйте хук `useTranslations` для получения всех загруженных переводов.
 
 ```jsx
-import { useTranslations } from '@makstashkevich/translate';
+import { useTranslations } from '@makstashkevich/translate'
 
 const DebugTranslations = () => {
-  const allTranslations = useTranslations();
+  const allTranslations = useTranslations()
 
-  return (
-    <pre>
-      {JSON.stringify(allTranslations, null, 2)}
-    </pre>
-  );
-};
+  return <pre>{JSON.stringify(allTranslations, null, 2)}</pre>
+}
 ```
 
 ## API
 
 ### `TranslateProvider` Props
 
--   `children`: `React.ReactNode` - Дочерние элементы, которые будут иметь доступ к контексту локализации.
--   `defaultLocale`: `LocaleType` - Язык по умолчанию для приложения.
--   `translations`: `AllTranslations` - Объект, содержащий переводы для всех поддерживаемых языков.
+- `children`: `React.ReactNode` - Дочерние элементы, которые будут иметь доступ к контексту локализации.
+- `defaultLocale`: `LocaleType` - Язык по умолчанию для приложения.
+- `translations`: `AllTranslations` - Объект, содержащий переводы для всех поддерживаемых языков.
 
 ### Функции и Хуки
 
--   `setLocale(locale: LocaleType)`: Устанавливает текущий язык.
--   `getLocale(): LocaleType`: Возвращает текущий язык.
--   `setDefaultLocale(defaultLocale: LocaleType)`: Устанавливает язык по умолчанию.
--   `getDefaultLocale(): LocaleType`: Возвращает язык по умолчанию.
--   `setTranslations(translations: AllTranslations)`: Устанавливает все переводы.
--   `translate(key: string, args?: Args): string`: Возвращает переведенную строку по ключу, с возможностью замены аргументов. Псевдоним: `t`.
--   `useLocale(): LocaleType`: Хук для получения текущего языка.
--   `useTranslations(): AllTranslations`: Хук для получения всех загруженных переводов.
+- `setLocale(locale: LocaleType)`: Устанавливает текущий язык.
+- `getLocale(): LocaleType`: Возвращает текущий язык.
+- `setDefaultLocale(defaultLocale: LocaleType)`: Устанавливает язык по умолчанию.
+- `getDefaultLocale(): LocaleType`: Возвращает язык по умолчанию.
+- `setTranslations(translations: AllTranslations)`: Устанавливает все переводы.
+- `translate(key: string, args?: Args): string`: Возвращает переведенную строку по ключу, с возможностью замены аргументов. Псевдоним: `t`.
+- `useLocale(): LocaleType`: Хук для получения текущего языка.
+- `useTranslations(): AllTranslations`: Хук для получения всех загруженных переводов.
 
 ### Типы
 
--   `LocaleType = 'ru' | 'en' | string`: Тип для обозначения языка.
--   `Translations = Record<string, any>`: Объект переводов для конкретного языка.
--   `AllTranslations = Record<LocaleType, Translations>`: Объект, содержащий переводы для всех языков.
--   `Args = Record<string, string | number> | (string | number)[]`: Тип для аргументов, используемых в строках перевода.
+- `LocaleType = 'ru' | 'en' | string`: Тип для обозначения языка.
+- `Translations = Record<string, any>`: Объект переводов для конкретного языка.
+- `AllTranslations = Record<LocaleType, Translations>`: Объект, содержащий переводы для всех языков.
+- `Args = Record<string, string | number> | (string | number)[]`: Тип для аргументов, используемых в строках перевода.
 
 ## Обсуждение
 
@@ -166,25 +162,23 @@ const DebugTranslations = () => {
 Поскольку состояние локализации управляется на стороне клиента с помощью Zustand, при использовании хуков `useLocale` или `useTranslations` на сервере (SSR/SSG) вы можете столкнуться с ошибками несоответствия гидратации. Чтобы избежать этого, убедитесь, что компоненты, использующие эти хуки, рендерятся только на клиенте, например, с помощью `useEffect` или `next/dynamic` с `ssr: false`.
 
 ```jsx
-import { useState, useEffect } from 'react';
-import { useLocale } from '@makstashkevich/translate';
+import { useState, useEffect } from 'react'
+import { useLocale } from '@makstashkevich/translate'
 
 const ClientSideComponent = () => {
-  const [mounted, setMounted] = useState(false);
-  const locale = useLocale();
+  const [mounted, setMounted] = useState(false)
+  const locale = useLocale()
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
   if (!mounted) {
-    return null;
+    return null
   }
 
-  return (
-    <p>Текущий язык на клиенте: {locale}</p>
-  );
-};
+  return <p>Текущий язык на клиенте: {locale}</p>
+}
 ```
 
 ---
@@ -201,12 +195,18 @@ const ClientSideComponent = () => {
 
 ```jsx
 const translations = {
-  en: { /* ... */ },
-  ru: { /* ... */ },
-  fr: { /* ... */ } // Новый язык
-};
+  en: {
+    /* ... */
+  },
+  ru: {
+    /* ... */
+  },
+  fr: {
+    /* ... */
+  } // Новый язык
+}
 
-<TranslateProvider defaultLocale="en" translations={translations}>
+;<TranslateProvider defaultLocale="en" translations={translations}>
   {children}
 </TranslateProvider>
 ```
