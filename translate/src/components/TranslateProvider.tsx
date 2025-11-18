@@ -1,13 +1,19 @@
 // src/components/TranslateProvider.tsx
-'use client';
+'use client'
 
-import React from 'react';
-import { LocaleType, AllTranslations, setDefaultLocale, setTranslations, useTranslateModel } from '../model';
+import React from 'react'
+import {
+  LocaleType,
+  AllTranslations,
+  setDefaultLocale,
+  setTranslations,
+  useTranslateModel
+} from '../model'
 
 interface TranslateProviderProps {
-  children: React.ReactNode;
-  defaultLocale: LocaleType;
-  translations: AllTranslations;
+  children: React.ReactNode
+  defaultLocale: LocaleType
+  translations: AllTranslations
 }
 
 /**
@@ -20,18 +26,18 @@ interface TranslateProviderProps {
 export const TranslateProvider: React.FC<TranslateProviderProps> = ({
   children,
   defaultLocale,
-  translations,
+  translations
 }) => {
-  const currentDefaultLocale = useTranslateModel((state) => state.defaultLocale);
-  const currentTranslations = useTranslateModel((state) => state.translations);
+  const currentDefaultLocale = useTranslateModel(state => state.defaultLocale)
+  const currentTranslations = useTranslateModel(state => state.translations)
 
   if (currentDefaultLocale !== defaultLocale) {
-    setDefaultLocale(defaultLocale);
+    setDefaultLocale(defaultLocale)
   }
 
   if (currentTranslations !== translations) {
-    setTranslations(translations);
+    setTranslations(translations)
   }
 
-  return <>{children}</>;
-};
+  return <>{children}</>
+}

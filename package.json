@@ -1,45 +1,33 @@
 {
-  "name": "@makstashkevich/translate",
-  "version": "1.1.0",
-  "description": "Node.js module for Next.js with localization and Zustand state management.",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "private": true,
   "scripts": {
-    "build": "tsc",
-    "push": "npm run build && npm publish --access public",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "keywords": [
-    "nextjs",
-    "localization",
-    "zustand",
-    "typescript",
-    "i18n"
-  ],
-  "author": "makstashkevich",
-  "license": "MIT",
-  "type": "module",
-  "dependencies": {
-    "react": "^19.1.1",
-    "zustand": "^5.0.8"
+    "prepublish": "pnpm build --filter=translate",
+    "build": "turbo build",
+    "start": "turbo start",
+    "dev": "turbo dev",
+    "test": "turbo test",
+    "test:e2e": "pnpm playwright test",
+    "lint": "prettier . --write"
   },
   "devDependencies": {
-    "@types/node": "^24.5.1",
-    "@types/react": "^19.1.13",
-    "typescript": "^5.9.2"
-  },
-  "peerDependencies": {
-    "react": ">=18.0.0"
+    "@playwright/test": "^1.51.0",
+    "@testing-library/react": "^14.2.1",
+    "@types/node": "20.5.7",
+    "@types/react": "^18.2.65",
+    "@types/react-dom": "18.2.7",
+    "jsdom": "^24.0.0",
+    "prettier": "^3.2.5",
+    "tsup": "^8.3.5",
+    "turbo": "^1.10.12",
+    "typescript": "^5.4.2",
+    "vitest": "^1.6.1"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/makstashkevich/translate.git"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
   }
 }

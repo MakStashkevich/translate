@@ -1,6 +1,6 @@
 // src/utils/argument-replacer.ts
 
-type Args = Record<string, string | number> | (string | number)[];
+type Args = Record<string, string | number> | (string | number)[]
 
 /**
  * Заменяет плейсхолдеры в строке перевода на соответствующие аргументы.
@@ -12,18 +12,18 @@ type Args = Record<string, string | number> | (string | number)[];
  */
 export function replaceArguments(translationString: string, args?: Args): string {
   if (!args) {
-    return translationString;
+    return translationString
   }
 
   return translationString.replace(/\{(\w+)\}/g, (match, key) => {
     if (Array.isArray(args)) {
-      const index = parseInt(key, 10);
+      const index = parseInt(key, 10)
       if (!isNaN(index) && args[index - 1] !== undefined) {
-        return String(args[index - 1]);
+        return String(args[index - 1])
       }
     } else if (typeof args === 'object' && args !== null && args.hasOwnProperty(key)) {
-      return String(args[key]);
+      return String(args[key])
     }
-    return match; // Если аргумент не найден, оставляем плейсхолдер как есть
-  });
+    return match // Если аргумент не найден, оставляем плейсхолдер как есть
+  })
 }

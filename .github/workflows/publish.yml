@@ -3,15 +3,15 @@ name: Publish Package
 on:
   push:
     tags:
-      - 'v*.*.*'  # триггер на тег вида v1.0.0
+      - 'v*.*.*' # триггер на тег вида v1.0.0
 
 jobs:
   publish:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read       # нужно для checkout
-      id-token: write      # нужно для OIDC
+      contents: read # нужно для checkout
+      id-token: write # нужно для OIDC
 
     steps:
       # 1. Получаем код

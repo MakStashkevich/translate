@@ -7,19 +7,19 @@
  * @returns Найденное значение или undefined, если ключ не найден.
  */
 export function getNestedTranslation(obj: Record<string, any>, key: string): string | undefined {
-  const parts = key.split('.');
-  let current: any = obj;
+  const parts = key.split('.')
+  let current: any = obj
 
   for (const part of parts) {
     if (current === null || typeof current !== 'object' || !current.hasOwnProperty(part)) {
-      return undefined;
+      return undefined
     }
-    current = current[part];
+    current = current[part]
   }
 
   if (typeof current === 'string') {
-    return current;
+    return current
   }
 
-  return undefined; // Возвращаем undefined, если найденное значение не является строкой
+  return undefined // Возвращаем undefined, если найденное значение не является строкой
 }
